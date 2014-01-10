@@ -2,24 +2,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+    <SeekBar
+        android:id="@+id/weather_check_frequency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/update_weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/send_message"
-        android:onClick="sendMessage" />
+        android:text="@string/update_weather"
+        android:onClick="updateWeather" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_vertical_margin" />
+        
+    <SeekBar
+        android:id="@+id/battery_check_frequency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/update_battery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/update_battery"
+        android:onClick="updateBattery" />
 
 </LinearLayout>
