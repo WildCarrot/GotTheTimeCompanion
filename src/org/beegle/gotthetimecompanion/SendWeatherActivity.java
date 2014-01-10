@@ -36,6 +36,7 @@ public class SendWeatherActivity extends Activity {
 	private static final UUID WATCH_APP_UUID = UUID.fromString("c5cec51c-276b-44ba-ae22-580e74a5ad21");
 	
 	private LocationManager locationMgr;
+	private String mockLocationProvider;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,19 @@ public class SendWeatherActivity extends Activity {
             
         String locationProvider = locationMgr.getBestProvider(new Criteria(), true);
             
+        mockLocationProvider = LocationManager.GPS_PROVIDER;
+        locationMgr.addTestProvider(mockLocationProvider, 
+        		/* requiresNetwork*/ false, 
+        		/* requiresSatellite*/ false, 
+        		/* requiresCell*/ false, 
+        		/* hasMonetaryCost*/ false, 
+        		/* supportsAltitude*/ true, 
+        		/* supportsSpeed */ true, 
+        		/* supportsBearing */ true, 
+        		/* powerRequirement*/ 0, 
+        		/* accuracy */ 5);
+        locationMgr.setTestProviderEnabled(mockLocationProvider, true);
+        
         if (locationProvider == null) {
     		Log.d("SendWeatherActivity", "no location services enabled");
 
@@ -79,6 +93,7 @@ public class SendWeatherActivity extends Activity {
         	Log.d("SendWeatherActivity", "requesting location updates and updating with last known loc");
         	doWeatherUpdate(locationMgr.getLastKnownLocation(locationProvider));
         	locationMgr.requestLocationUpdates(locationProvider, 0, 0, locationListener);
+        	locationMgr.requestLocationUpdates(mockLocationProvider, 0, 0, locationListener);
         }
 	}
 	class GetWeatherTask extends AsyncTask<Location, Void, Void> {
