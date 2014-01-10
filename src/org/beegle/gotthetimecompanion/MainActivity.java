@@ -150,7 +150,8 @@ class GetWeatherTask extends AsyncTask<Location, Void, Void> {
 
 	            Log.d("GetWeatherTask", String.format("%f, %f", latitude, longitude));
 	        } catch (Exception e) {
-	            throw new RuntimeException(e);
+	        	Log.d("GetWeatherTask", "Exception getting weather, ignoring it and not crashing...");
+//	            throw new RuntimeException(e);
 	        }
 	        
 	        return null;
@@ -158,7 +159,7 @@ class GetWeatherTask extends AsyncTask<Location, Void, Void> {
 
 	}
 	
-	public void sendBattery(View view) {
+	public void updateBattery(View view) {
 		sendBatteryToWatch();
 	}
 	
