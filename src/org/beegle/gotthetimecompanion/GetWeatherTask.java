@@ -1,5 +1,4 @@
-// Get weather information and push it to the given watchface.
-
+// Get weather information and push it to the watch.
 package org.beegle.gotthetimecompanion;
 
 import java.io.BufferedReader;
@@ -93,7 +92,6 @@ class GetWeatherTask extends AsyncTask<Void, Void, Void> implements Runnable {
             Log.d("GetWeatherTask", String.format("%f, %f", latitude, longitude));
         } catch (Exception e) {
         	Log.d("GetWeatherTask", "Exception getting weather, ignoring it and not crashing...");
-//            throw new RuntimeException(e);
         }
         
         return null;

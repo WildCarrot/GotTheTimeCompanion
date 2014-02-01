@@ -1,8 +1,8 @@
-package org.beegle.gotthetimecompanion;
-
 // Polling service for getting information and pushing it
 // to the GotTheTime watchface.
 // Currently gets weather and phone battery information.
+
+package org.beegle.gotthetimecompanion;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 

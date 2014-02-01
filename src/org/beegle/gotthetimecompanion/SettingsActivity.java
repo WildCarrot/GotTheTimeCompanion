@@ -1,3 +1,7 @@
+// I intend to use the settings for changing how often the
+// app will poll for weather and battery status.
+// But, I haven't done that yet; it's still hard coded.
+
 package org.beegle.gotthetimecompanion;
 
 import android.annotation.TargetApi;

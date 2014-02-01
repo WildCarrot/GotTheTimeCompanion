@@ -37,6 +37,7 @@ class GetBatteryTask extends AsyncTask<Void, Void, Void> implements Runnable {
 		Intent batteryStatus = context.registerReceiver(null, ifilter);
 		
 		int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+		// Here's how to get the percent if I ever want to send that instead.
 		//int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
 		//float batteryPct = level / (float)scale;
 		
