@@ -25,22 +25,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="org.beegle.gotthetimecompanion.SendWeatherActivity"
-            android:label="@string/title_activity_send_weather"
-            android:parentActivityName="org.beegle.gotthetimecompanion.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.beegle.gotthetimecompanion.MainActivity" />
-        </activity>
-        <activity
-            android:name="org.beegle.gotthetimecompanion.SendBatteryActivity"
-            android:label="@string/title_activity_send_battery"
-            android:parentActivityName="org.beegle.gotthetimecompanion.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.beegle.gotthetimecompanion.MainActivity" />
-        </activity>
-    </application>
+  
 
+        <activity
+            android:name="org.beegle.gotthetimecompanion.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <service android:name=".PollingService"  
+            android:enabled="true"
+            android:exported="false" 
+            android:label="@string/app_name">
+	   		<intent-filter>
+	   		    <action android:name="GET_WEATHER"></action>
+   			</intent-filter>
+   			<intent-filter>
+   			    <action android:name="GET_BATTERY"></action>
+   			</intent-filter>
+		</service>
+    </application>
+          
 </manifest>

@@ -7,5 +7,7 @@
     <string name="update_battery">Update Battery</string>
     <string name="title_activity_send_weather">SendWeatherActivity</string>
     <string name="title_activity_send_battery">SendBatteryActivity</string>
+    <string name="title_activity_polling_service">PollingService</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
