@@ -64,7 +64,7 @@ class GetWeatherTask extends AsyncTask<Void, Void, Void> implements Runnable {
         Log.d("GetWeatherTask", String.format("%f %f", latitude, longitude));
         
         try {
-            URL u = new URL(String.format("http://api.openweathermap.org/data/2.1/find/city?lat=%f&lon=%f&cnt=1",
+            URL u = new URL(String.format("http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f",
                     latitude,
                     longitude));
 
@@ -76,10 +76,9 @@ class GetWeatherTask extends AsyncTask<Void, Void, Void> implements Runnable {
                 Log.d("GetWeatherTask", json);
 
                 JSONObject jsonObject = new JSONObject(json);
-                JSONObject l = jsonObject.getJSONArray("list").getJSONObject(0);
-                JSONObject m = l.getJSONObject("main");
+                JSONObject m = jsonObject.getJSONObject("main");
                 double temperature = m.getDouble("temp");
-                int wtype = l.getJSONArray("weather").getJSONObject(0).getInt("id");
+                int wtype = jsonObject.getJSONArray("weather").getJSONObject(0).getInt("id");
 
                 int weatherIcon = getIconFromWeatherId(wtype);
                 int temp = (int) (temperature - 273.15);
@@ -92,6 +91,7 @@ class GetWeatherTask extends AsyncTask<Void, Void, Void> implements Runnable {
             Log.d("GetWeatherTask", String.format("%f, %f", latitude, longitude));
         } catch (Exception e) {
         	Log.d("GetWeatherTask", "Exception getting weather, ignoring it and not crashing...");
+        	e.printStackTrace();
         }
         
         return null;
