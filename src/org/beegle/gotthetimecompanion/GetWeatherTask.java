@@ -42,15 +42,25 @@ class GetWeatherTask extends AsyncTask<Void, Void, Void> implements Runnable {
 	}
 	
 	private int getIconFromWeatherId(int weatherId) {
-        if (weatherId < 600) {
+		//  http://bugs.openweathermap.org/projects/api/wiki/Weather_Condition_Codes
+//        WEATHER_ICON_NONE = 0,
+//        WEATHER_ICON_RAIN = 1,  // 200 - 500                                                                         
+//        WEATHER_ICON_SNOW = 2,  // 600                                                                               
+//        WEATHER_ICON_SUN = 3,   // 800, 801                                                                          
+//        WEATHER_ICON_CLOUD = 4, // 802-804    
+		if (weatherId < 600) {
+			return 1;
+		}
+		if (weatherId < 800) {
             return 2;
-        } else if (weatherId < 700) {
+        } 
+		if (weatherId < 802) {
             return 3;
-        } else if (weatherId > 800) {
-            return 1;
-        } else {
-            return 0;
-        }
+        } 
+		if (weatherId < 805) {
+            return 4;
+		}
+		return 0;
 	}
 	// @Override
 	public void run() {
@@ -75,12 +85,12 @@ class GetWeatherTask extends AsyncTask<Void, Void, Void> implements Runnable {
                 Log.d("GetWeatherTask", json);
 
                 JSONObject jsonObject = new JSONObject(json);
-                JSONObject m = jsonObject.getJSONObject("main");
-                double temperature = m.getDouble("temp");
+                double temperature = jsonObject.getJSONObject("main").getDouble("temp");
                 int wtype = jsonObject.getJSONArray("weather").getJSONObject(0).getInt("id");
 
                 int weatherIcon = getIconFromWeatherId(wtype);
                 int temp = (int) (temperature - 273.15);
+                Log.d("GetWeatherTask", String.format("%d %d %d", wtype, weatherIcon, temp));
 
                 sendWeatherDataToWatch(weatherIcon, temp);
             } finally {
