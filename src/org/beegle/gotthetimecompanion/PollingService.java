@@ -86,8 +86,8 @@ public class PollingService extends Service {
 															locationMgr.getLastKnownLocation(locationProvider));
 				threadPoolExec.scheduleWithFixedDelay(weatherTask,
 							0 /* initial delay */,
-							1 /* delay */,
-							java.util.concurrent.TimeUnit.HOURS);
+							15 /* delay */,
+							java.util.concurrent.TimeUnit.MINUTES);
 			}
 		}
 		else if (action == GET_BATTERY) {
@@ -95,7 +95,7 @@ public class PollingService extends Service {
 			GetBatteryTask batteryTask = new GetBatteryTask(getApplicationContext());
 			threadPoolExec.scheduleWithFixedDelay(batteryTask,
 					0 /* initial delay */,
-					30 /* delay */,
+					15 /* delay */,
 					java.util.concurrent.TimeUnit.MINUTES);
 		}
 		
