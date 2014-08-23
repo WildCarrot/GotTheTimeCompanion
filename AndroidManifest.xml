@@ -10,6 +10,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -21,27 +22,44 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-  
 
         <activity
             android:name="org.beegle.gotthetimecompanion.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
-        <service android:name=".PollingService"  
+
+        <service android:name=".PollingService"
             android:enabled="true"
-            android:exported="false" 
+            android:exported="false"
             android:label="@string/app_name">
-	   		<intent-filter>
-	   		    <action android:name="GET_WEATHER"></action>
-   			</intent-filter>
-   			<intent-filter>
-   			    <action android:name="GET_BATTERY"></action>
-   			</intent-filter>
-		</service>
+	    <intent-filter>
+	        <action android:name="GET_WEATHER"></action>
+   	        <action android:name="GET_BATTERY"></action>
+   	        <action android:name="GET_SIGNAL_STRENGTH_CELL"></action>
+   	        <action android:name="GET_SIGNAL_STRENGTH_WIFI"></action>
+   	        <action android:name="GET_TIMEZONE"></action>
+   	    </intent-filter>
+	</service>
+
+	<!-- Timezone change intent is protected, so this will have to do. -->
+	<receiver android:name=".TimeChangeReceiver">
+	    <intent-filter>
+	        <action android:name="android.intent.action.ACTION_TIME_CHANGED"/>
+	    </intent-filter>
+	</receiver>
+
+	<!-- Register for changes in low/okay state to display a warning on the watch.
+	     The actual battery change intent is system-only, so will have to poll for that.
+	-->
+	<receiver android:name=".GetBatteryTask.BatteryLevelReceiver">
+	    <intent-filter>
+		<action android:name="android.intent.action.ACTION_BATTERY_LOW"/>
+		<action android:name="android.intent.action.ACTION_BATTERY_OKAY"/>
+	    </intent-filter>
+	</receiver>
+
     </application>
-          
 </manifest>
